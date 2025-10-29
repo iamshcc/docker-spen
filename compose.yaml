@@ -46,8 +46,20 @@ services:
       - db
     networks:
       - appnet
-      
-    
+
+  frontend:
+    image: frontend:v1.0.0
+    container_name: frontend
+    restart: always
+    build:
+      context: ./frontend
+      dockerfile: frontend.dockerfile
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+    networks:
+      - appnet
 
 volumes:
   pgdata: {}
