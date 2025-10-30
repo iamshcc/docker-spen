@@ -2,9 +2,6 @@ FROM node:22-alpine
 
 WORKDIR /server
 
-# Add curl for network check (optional)
-RUN apt install -y curl
-
 # Set a reliable npm registry mirror
 RUN npm config set registry https://registry.npmmirror.com
 
