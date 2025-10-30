@@ -3,3 +3,4 @@
 **/.idea
 **/.vscode
 **/.qodo
+**/!.env.example
