@@ -15,7 +15,7 @@ WORKDIR /app
 COPY --from=builder /app/build ./build
 COPY package*.json ./
 
-RUN npm ci --omit=dev
+RUN npm install
 
 EXPOSE 3000
 
