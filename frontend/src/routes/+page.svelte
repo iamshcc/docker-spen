@@ -1,6 +1,6 @@
 <script>
-    import {enhance} from "$app/forms";
-    const { data } = $props();
+	import { enhance } from '$app/forms';
+	const { data } = $props();
 	const articles = $derived(data.articles);
 </script>
 
@@ -12,14 +12,15 @@
 	<hr />
 	<div class="container mx-auto flex max-w-3xl flex-col flex-wrap gap-3 py-4">
 		<div>
-			<form class="flex flex-col gap-2" method="POST" use:enhance>
+			<form action="?/create" class="flex flex-col gap-2" method="POST" use:enhance>
 				<label class="flex flex-col">
 					<span>Title</span>
 					<input type="text" name="title" class="rounded bg-stone-100 p-2" placeholder="title..." />
 				</label>
 				<label class="flex flex-col">
 					<span>body</span>
-					<textarea class="rounded bg-stone-100 p-2" name="body" placeholder="body..." rows="5"></textarea>
+					<textarea class="rounded bg-stone-100 p-2" name="body" placeholder="body..." rows="5"
+					></textarea>
 				</label>
 				<div>
 					<button class="flex rounded bg-blue-500 p-2 text-sm text-white">Create Article</button>
@@ -27,7 +28,22 @@
 			</form>
 		</div>
 		{#each articles as article, index (index)}
-			<article class="rounded border p-2 hover:bg-stone-100">{article.title}</article>
+			<article
+				class="flex items-center justify-between rounded border border-stone-200 p-2 hover:bg-stone-100"
+			>
+				<div>
+					{article.title}
+				</div>
+
+				<div>
+					<form action="?/delete" method="POST" use:enhance>
+						<input type="hidden" name="id" value={article.id} />
+						<button class="text-xs cursor-pointer text-red-400 transition-all hover:scale-95 hover:text-red-500"
+							>delete</button
+						>
+					</form>
+				</div>
+			</article>
 		{/each}
 	</div>
 </main>

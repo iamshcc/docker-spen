@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 
 app.get("/api/articles", async (req, res) => {
   try {
-    const articles = await prisma.article.findMany();
+    const articles = await prisma.article.findMany({ orderBy: { createdAt: "desc"} });
     res.json(articles);
   } catch (error) {
     console.error(error);

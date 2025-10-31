@@ -8,7 +8,7 @@ export const load = async ({ fetch }) => {
 		const res = await fetch(API_URL + '/api/articles');
 		const articles = await res.json();
 		return {
-			message: 'From Load Constant',
+			message: 'FLC',
 			articles
 		};
 	} catch (error) {
@@ -18,7 +18,7 @@ export const load = async ({ fetch }) => {
 
 /** @satisfies {import('./$types').Actions} */
 export const actions = {
-	default: async ({ request, fetch }) => {
+	create: async ({ request, fetch }) => {
 		const formData = await request.formData();
 		const { title, body } = Object.fromEntries(formData);
 
@@ -31,7 +31,22 @@ export const actions = {
 		console.log('Article created');
 
 		return {
-			message: 'Todo created successfully'
+			message: 'Article created successfully'
+		};
+	},
+	delete: async ({ request, fetch }) => {
+		const formData = await request.formData();
+		const { id } = Object.fromEntries(formData);
+
+		await fetch(API_URL + '/api/articles/' + id, {
+			method: 'DELETE',
+			headers: { 'Content-Type': 'application/json' }
+		});
+
+		console.log('Article deleted successfully.');
+
+		return {
+			message: 'Article deleted successfully'
 		};
 	}
 };
