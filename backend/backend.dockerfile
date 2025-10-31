@@ -8,6 +8,8 @@ RUN npm install
 
 COPY . .
 
+RUN mv .env.example .env
+
 RUN npx prisma generate
 
 EXPOSE 5000

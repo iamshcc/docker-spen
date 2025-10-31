@@ -8,8 +8,8 @@ RUN npm install
 
 COPY . .
 
+RUN mv .env.example .env
 RUN mv svelte.dev.txt svelte.config.js
-
 RUN npm run build
 
 FROM node:22.21.1-alpine3.21 AS runner
