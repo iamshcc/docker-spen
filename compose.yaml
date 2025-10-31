@@ -63,6 +63,19 @@ services:
     networks:
       - appnet
 
+  nginx:
+    container_name: nginx
+    image: nginx:1.29.3-alpine3.22
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - appnet
+
 volumes:
   pgdata: {}
 

@@ -1,16 +1,15 @@
-FROM node:22-alpine
+FROM node:22.21.1-alpine3.21
 
 WORKDIR /server
 
-# Set a reliable npm registry mirror
-RUN npm config set registry https://registry.npmmirror.com
-
 COPY package*.json ./
 
-# Retry install in case of temporary network fail
-RUN npm install || npm install --network-timeout=600000
+RUN npm install
 
 COPY . .
 
+RUN npx prisma generate
+
 EXPOSE 5000
+
 CMD ["npm", "start"]
